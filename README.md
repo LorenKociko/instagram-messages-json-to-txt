@@ -1,4 +1,4 @@
-# Instagram-JSON-Reader
+# Instagram JSON Reader
 
 Instagram provides you the ability to download all your account data localy, but most of your data are stored as JSON files and that makes it less user friendly.
 
