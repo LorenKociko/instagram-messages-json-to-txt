@@ -34,34 +34,38 @@ with open('messages.json', encoding="utf8") as f:
     jfile = json.load(f)
 
 
-my_name = find_myname(jfile)
-pre_user = ""
-texts_list = []
+def main():
+    my_name = find_myname(jfile)
+    pre_user = ""
+    texts_list = []
 
-for session in reversed(range(len(jfile))):
-    indx = len(jfile[session]["conversation"])-1
-    pre_date = ""
-    cur_user = find_participants(my_name,jfile[session]["participants"])
+    for session in reversed(range(len(jfile))):
+        indx = len(jfile[session]["conversation"])-1
+        pre_date = ""
+        cur_user = find_participants(my_name,jfile[session]["participants"])
 
-    if pre_user and pre_user != cur_user:
-        dump_messages(pre_user,texts_list)
-        texts_list = []
+        if pre_user and pre_user != cur_user:
+            dump_messages(pre_user,texts_list)
+            texts_list = []
 
-    pre_user = cur_user
-    while indx>=0:
-        if "text" in jfile[session]["conversation"][indx]:
-            dtime = datetime.datetime.strptime(jfile[session]["conversation"][indx]["created_at"][:19], '%Y-%m-%dT%H:%M:%S')
-            cur_date = dtime.date()
+        pre_user = cur_user
+        while indx>=0:
+            if "text" in jfile[session]["conversation"][indx]:
+                dtime = datetime.datetime.strptime(jfile[session]["conversation"][indx]["created_at"][:19], '%Y-%m-%dT%H:%M:%S')
+                cur_date = dtime.date()
 
-            if cur_date != pre_date:
-                texts_list.append("\n////////////////")
-                texts_list.append("///"+dtime.strftime('%d/%m/%y')+"///")
-                texts_list.append("///////////////\n")
-                pre_date=dtime.date() 
+                if cur_date != pre_date:
+                    texts_list.append("\n////////////////")
+                    texts_list.append("///"+dtime.strftime('%d/%m/%y')+"///")
+                    texts_list.append("///////////////\n")
+                    pre_date=dtime.date() 
 
-            text=f'{dtime.time()} {jfile[session]["conversation"][indx]["sender"]}: {jfile[session]["conversation"][indx]["text"]}'
-            texts_list.append(text)
-        indx-=1
-    
-if texts_list:
-    dump_messages(cur_user,texts_list)
+                text=f'{dtime.time()} {jfile[session]["conversation"][indx]["sender"]}: {jfile[session]["conversation"][indx]["text"]}'
+                texts_list.append(text)
+            indx-=1
+        
+    if texts_list:
+        dump_messages(cur_user,texts_list)
+
+if __name__ == '__main__':
+    main()
