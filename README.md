@@ -4,9 +4,9 @@ Instagram provides you the ability to download all your account data localy, but
 
 ![image](https://user-images.githubusercontent.com/40165126/103276414-1b4cad80-49cf-11eb-9a01-f2e6a1ec330d.png)
  
-This script uses the messages.json file, to extract all your text chats / conversations  you ever had, and stores them .txt files.
+This script uses the messages.json file, to extract all your text chats / conversations, and stores them in separate .txt files depending on the username of the person you communicated with.
 
-You just need to run the script in the same folder you have stored the messages.json file, and various .txt files will be created based on the people you had conversations with 
+You just need to run the script in the same folder you have stored the messages.json file, and various .txt files will be auto-created.
 
 ![image](https://user-images.githubusercontent.com/40165126/103277465-b777b400-49d1-11eb-9476-ef476c2ef2e9.png)
 ![image](https://user-images.githubusercontent.com/40165126/103278733-e17ea580-49d4-11eb-8c05-ebb826b58a11.png)
